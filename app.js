@@ -19,6 +19,9 @@ app.use(express.json())
 const usersRouter = require('./routes/users')
 app.use('/users',usersRouter)
 
+const OneToMany = require('./routes/OneToMany')
+app.use('/t2',OneToMany)
+
 app.listen(9000, ()=>{
     console.log('Server started')
 })

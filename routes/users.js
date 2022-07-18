@@ -1,35 +1,38 @@
 const express = require('express')
 const router = express.Router()
+const mongoose = require('mongoose');
+
 const User = require('../models/user')
+const Sport  = require('../models/sports'); 
 
-
-router.get('/', async (req,res)=>{
+router.get('/', async (req,res,next)=>{
     try{
-        const users = await User.find() 
-        res.json(users)
+        const users = await User.find();
+        res.status(200).json(users)
     }catch(err){
         res.send('Error '+ err)
     }
 })
 
-router.post('/', async (req,res)=>{
+router.post('/', async(req,res)=> {
     const user = new User({
-        //data from object from client side
         firstName: req.body.firstName,
-        lastName: req.body.lastName
-    }) 
+        lastName : req.body.lastName,
+    })
     try{
-        const us = await user.save()
-        res.json(us)
+       
+        const a = await user.save();
+        res.status(200).json(a);
     }catch(err){
         res.send('Error')
     }
 })
 
-router.get('/:id', async (req,res)=>{
+
+router.get('/:id', async (req,res,next)=>{
     try{
         const user = await User.findById(req.params.id)
-        res.json(user)
+        res.status(200).json(user)
     }catch(err){
         res.send('Error '+ err)
     }
@@ -48,7 +51,7 @@ router.patch('/:id', async (req,res)=>{
         }
 
         const us = await user.save()
-        res.json(us)
+        res.status(200).json(us)
     }catch(err){
         res.send('Error')
     }
@@ -59,7 +62,7 @@ router.delete('/:id', async (req,res)=>{
         const user = await User.findById(req.params.id)
         
         const us = await user.remove()
-        res.json(us)
+        res.status(200).json(us)
     }catch(err){
         res.send('Error')
     }
