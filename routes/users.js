@@ -41,7 +41,7 @@ const Sport  = require('../models/sports');
  *       properties:
  *         id:
  *           type: string
- *           description: The auto-generated id of the subject
+ *           description: The auto-generated id of the sport
  *         name:
  *           type: string
  *           description: The sport name
